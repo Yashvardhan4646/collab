@@ -131,6 +131,7 @@ gsap.from(".about-point", {
   ease: "power3.out"
 });
 import { db } from "./firebase.js";
+
 import {
   collection,
   addDoc,
@@ -139,6 +140,7 @@ import {
 
 const form = document.getElementById("submitForm");
 const button = document.querySelector(".submit-btn");
+const successText = document.getElementById("formSuccess");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -158,33 +160,13 @@ form.addEventListener("submit", async (e) => {
   try {
     await addDoc(collection(db, "submissions"), data);
 
-    button.innerText = "Submitted ✓";
+    button.innerText = "Request sent";
+    successText.classList.add("show");
     form.reset();
 
-    setTimeout(() => {
-      button.innerText = "Submit request";
-      button.disabled = false;
-    }, 2500);
-
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
     button.innerText = "Error — retry";
     button.disabled = false;
   }
 });
-const successText = document.getElementById("formSuccess");
-
-try {
-  await addDoc(collection(db, "submissions"), data);
-
-  button.classList.add("success");
-  button.innerText = "Request sent";
-
-  successText.classList.add("show");
-  form.reset();
-
-} catch (error) {
-  console.error(error);
-  button.innerText = "Error — retry";
-  button.disabled = false;
-}
