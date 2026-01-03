@@ -130,3 +130,61 @@ gsap.from(".about-point", {
   duration: 0.9,
   ease: "power3.out"
 });
+import { db } from "./firebase.js";
+import {
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+const form = document.getElementById("submitForm");
+const button = document.querySelector(".submit-btn");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  button.innerText = "Submitting...";
+  button.disabled = true;
+
+  const data = {
+    name: document.getElementById("name").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    discord: document.getElementById("discord").value.trim(),
+    portfolio: document.getElementById("portfolio").value.trim(),
+    project: document.getElementById("project").value.trim(),
+    createdAt: serverTimestamp(),
+  };
+
+  try {
+    await addDoc(collection(db, "submissions"), data);
+
+    button.innerText = "Submitted ✓";
+    form.reset();
+
+    setTimeout(() => {
+      button.innerText = "Submit request";
+      button.disabled = false;
+    }, 2500);
+
+  } catch (error) {
+    console.error(error);
+    button.innerText = "Error — retry";
+    button.disabled = false;
+  }
+});
+const successText = document.getElementById("formSuccess");
+
+try {
+  await addDoc(collection(db, "submissions"), data);
+
+  button.classList.add("success");
+  button.innerText = "Request sent";
+
+  successText.classList.add("show");
+  form.reset();
+
+} catch (error) {
+  console.error(error);
+  button.innerText = "Error — retry";
+  button.disabled = false;
+}

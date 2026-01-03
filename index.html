@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css" />
   <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
 <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script type="module" src="firebase.js"></script>
 <script src="script.js"></script>
 
 </head>
@@ -145,40 +146,42 @@
       </p>
     </div>
 
-    <form class="submit-form">
+    <form class="submit-form" id="submitForm">
 
-      <!-- Personal -->
-      <div class="form-group">
-        <label>Name</label>
-        <input type="text" required>
-      </div>
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" id="name" required>
+  </div>
 
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" required>
-      </div>
+  <div class="form-group">
+    <label>Email</label>
+    <input type="email" id="email" required>
+  </div>
 
-      <div class="form-group">
-        <label>Discord (optional)</label>
-        <input type="text">
-      </div>
+  <div class="form-group">
+    <label>Discord (optional)</label>
+    <input type="text" id="discord">
+  </div>
 
-      <!-- Work -->
-      <div class="form-group">
-        <label>Portfolio</label>
-        <input type="url" placeholder="https://">
-      </div>
+  <div class="form-group">
+    <label>Portfolio</label>
+    <input type="url" id="portfolio">
+  </div>
 
-      <div class="form-group">
-        <label>Project Link</label>
-        <input type="url" placeholder="https://">
-      </div>
+  <div class="form-group">
+    <label>Project Link</label>
+    <input type="url" id="project">
+  </div>
 
-      <button class="submit-btn">Submit request</button>
+  <button class="submit-btn" type="submit">Submit request</button>
+</form>
 
-    </form>
 
   </div>
+  <p class="form-success" id="formSuccess">
+  Your request has been sent. We’ll get back if it’s a match.
+</p>
+
 </section>
 
     <section class="owners" id="Contact">

@@ -669,3 +669,26 @@ footer .links {
     text-decoration: none;
     font-size: 1rem;
 }
+/* ===============================
+   FORM SUCCESS STATE
+================================ */
+.form-success {
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: #2c2c2c;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+}
+
+.form-success.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Button success state */
+.submit-btn.success {
+  background: #111;
+  pointer-events: none;
+}
+
